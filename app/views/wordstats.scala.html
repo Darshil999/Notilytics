@@ -1,0 +1,37 @@
+@import scala.jdk.CollectionConverters._
+
+@(message: String, searchTerm: String, stats: java.util.Map[String, Long], request: Http.Request)
+
+@main("NotiLytics - Word Stats") {
+<div class="nl-wrapper">
+    <h1 class="nl-title">@message</h1>
+
+    <div class="nl-wordstats">
+        <h2>Word Statistics for "@searchTerm"</h2>
+        <p><b>Top words used in article descriptions:</b></p>
+
+        <table class="nl-wordstats-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Word</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+            @for(((word, count), idx) <- stats.asScala.zipWithIndex) {
+                <tr>
+                    <td>@(idx + 1)</td>
+                    <td>@word</td>
+                    <td>@count</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+        <p style="margin-top:20px;">
+            <a href="@routes.NotiLyticsController.index()">← Back to Search</a>
+        </p>
+    </div>
+</div>
+}

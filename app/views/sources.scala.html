@@ -1,0 +1,31 @@
+@(title: String, sources: List[Source], request: Http.Request)
+
+@main(title) {
+<div class="nl-wrapper">
+    <h1>@title</h1>
+    
+    <p><a href="@routes.NotiLyticsController.index()">← Back to Home</a></p>
+    
+    @if(sources != null && !sources.isEmpty()) {
+        <div class="nl-sources">
+            <h2>Available News Sources (@sources.size() sources found)</h2>
+            <ul class="sources-list">
+            @for(source <- sources) {
+                <li class="source-item">
+                    <h3><a href="@source.getUrl" target="_blank">@source.getName</a></h3>
+                    <p><strong>Category:</strong> @source.getCategory | 
+                       <strong>Country:</strong> @source.getCountry | 
+                       <strong>Language:</strong> @source.getLanguage</p>
+                    <p>@source.getDescription</p>
+                    @if(source.getId != null) {
+                        <p><a href="@routes.NotiLyticsController.sourceProfile(source.getId)">View source profile →</a></p>
+                    }
+                </li>
+            }
+            </ul>
+        </div>
+    } else {
+        <p>No sources found matching your criteria.</p>
+    }
+</div>
+}

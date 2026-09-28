@@ -1,0 +1,72 @@
+@*
+New template: sourceProfile.scala.html (Java version)
+----------------------------------------------------
+Individual Part (a) — Source website profile page.
+
+Renders:
+- Full profile of a single news Source (name, description, website, category, language, country)
+- Latest 10 articles for that source (title → article URL, author, published date)
+
+Parameters:
+- source: models.Source
+- articles: java.util.List[models.Article]   (can be empty)
+- request: play.mvc.Http.Request             (used for helpers/layouts as needed)
+
+Controller contract:
+- The controller should resolve the Source by its id and fetch up to the latest 10 articles.
+- On success: return 200 OK and render:
+views.html.sourceProfile.render(source, articles, request)
+- If the source cannot be found: return 404 NOT_FOUND (do not call this template in that case).
+
+Linking from index page:
+- When an Article has a non-null sourceId, the source name in results should link to:
+@routes.NotiLyticsController.sourceProfile(article.getSourceId())
+
+Notes:
+- The "Published" timestamp shown assumes conversion to EDT is performed upstream (service/model).
+- This template is purely server-rendered; no live updates until the next request.
+*@
+@(source: models.Source, articles: java.util.List[models.Article], request: Http.Request)
+
+@main("Source: " + source.getName()) {
+    <div class="nl-wrapper">
+        <h1>@source.getName()</h1>
+        @* Basic source metadata *@
+        @if(source.getDescription() != null && !source.getDescription().trim().isEmpty()) {
+            <p>@source.getDescription()</p>
+        }
+        <p>
+            <b>Website:</b>
+            @if(source.getUrl() != null && !source.getUrl().trim().isEmpty()) {
+                <a href="@source.getUrl()" target="_blank" rel="noopener noreferrer">@source.getUrl()</a>
+            } else {
+                <span>Unknown</span>
+            }
+        </p>
+        <p>
+            <b>Category:</b> @Option(source.getCategory()).getOrElse("n/a")
+            | <b>Language:</b> @Option(source.getLanguage()).getOrElse("n/a")
+            | <b>Country:</b> @Option(source.getCountry()).getOrElse("n/a")
+        </p>
+
+        @* Articles list *@
+        <h2>Latest 10 Articles</h2>
+        @if(articles != null && !articles.isEmpty) {
+            <ol class="nl-list">
+            @for(a <- articles) {
+                <li class="nl-list__item">
+                    <a href="@a.getUrl()" target="_blank" rel="noopener noreferrer">@a.getTitle()</a><br/>
+                    <span><b>Author:</b> @Option(a.getAuthor()).getOrElse("Unknown")</span><br/>
+                    <span><b>Published:</b> @Option(a.getPublishedAt()).getOrElse("Unknown")</span>
+                </li>
+            }
+            </ol>
+        } else {
+            <p>No recent articles for this source.</p>
+        }
+
+        <p style="margin-top: 1.5rem;">
+            <a href="@routes.NotiLyticsController.index()">Back to search</a>
+        </p>
+    </div>
+}

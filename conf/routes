@@ -1,0 +1,13 @@
+# NotiLytics routes
+GET     /                               controllers.NotiLyticsController.index(request: play.mvc.Http.Request)
+GET     /search                         controllers.NotiLyticsController.search(request: play.mvc.Http.Request)
+GET     /wordstats/:query              controllers.NotiLyticsController.wordStats(query: String, request: play.mvc.Http.Request)
+
+# Source profile route - Added by task5
+GET     /source/:id                     controllers.NotiLyticsController.sourceProfile(id: String, request: play.mvc.Http.Request)
+
+# Show sources route - Added by task c
+GET     /sources                        controllers.NotiLyticsController.showSources(request: play.mvc.Http.Request)
+
+# Keep static assets
+GET     /assets/*file                   controllers.Assets.versioned(path="/public", file: Asset)

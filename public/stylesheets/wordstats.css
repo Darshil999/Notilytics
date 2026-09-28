@@ -1,0 +1,112 @@
+.nl-wordstats {
+    margin-top: 40px;
+    background: #fafaff;
+    border-radius: 10px;
+    padding: 25px 30px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    animation: fadeInAnim 0.6s ease-in;
+}
+
+.nl-wordstats h2 {
+    color: #3f51b5;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.nl-wordstats p {
+    color: #444;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.nl-wordstats ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.nl-wordstats li {
+    background: #f0f3ff;
+    margin: 8px 0;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 1rem;
+    border-left: 4px solid #3f51b5;
+    transition: background 0.3s ease;
+}
+
+.nl-wordstats li:hover {
+    background: #e7eaff;
+}
+
+.nl-wordstats b {
+    color: #2a2a7f;
+}
+
+.nl-wordstats a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nl-wordstats a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeInAnim {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Table Styling for Word Stats --- */
+.nl-wordstats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 1rem;
+    background: #f9faff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.04);
+    animation: fadeInAnim 0.6s ease-in;
+}
+
+.nl-wordstats-table th {
+    background-color: #e3e7ff;
+    color: #2a2a7f;
+    font-weight: 700;
+    text-align: left;
+    padding: 12px 16px;
+}
+
+.nl-wordstats-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #e5e7f0;
+    color: #333;
+}
+
+.nl-wordstats-table tr:nth-child(even) {
+    background-color: #f4f6ff;
+}
+
+.nl-wordstats-table tr:hover {
+    background-color: #ebedff;
+    transition: background 0.3s ease;
+}
+
+.nl-wordstats-table th:first-child,
+.nl-wordstats-table td:first-child {
+    text-align: center;
+    width: 50px;
+}

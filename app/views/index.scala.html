@@ -1,0 +1,118 @@
+@(message: String, searchHistory: List[SearchQuery], request: Http.Request)
+
+@*
+Modified index.scala.html (Java version)
+Enhanced by Wei Huang, Priya Dhanvi, Darshil Ketankumar Kalyani, Muhammed Zayed Abdul Nasser
+*@
+
+@main("NotiLytics") {
+<div class="nl-wrapper">
+    <h1 class="nl-title">@message</h1>
+    <form method="GET" action="@routes.NotiLyticsController.search()" class="nl-form">
+        <input
+                class="nl-input nl-input--with-icon"
+                type="text"
+                name="searchTerm"
+                placeholder="Enter search terms"
+                aria-label="Search terms"
+        />
+        <button type="submit" class="nl-go">Go!</button>
+        <div class="nl-radios">
+            <label><input type="radio" name="sortBy" value="publishedAt" checked> published date</label>
+            <label><input type="radio" name="sortBy" value="relevancy"> relevancy</label>
+            <label><input type="radio" name="sortBy" value="popularity"> popularity</label>
+        </div>
+    </form>
+
+    @if(searchHistory != null && !searchHistory.isEmpty()) {
+    @for(searchQuery <- searchHistory) {
+    <div class="nl-search-result">
+        <h2>Search terms: <i>@searchQuery.getSearchTerm</i> @searchQuery.getSentiment</h2>
+        <h3>Total results: @searchQuery.getTotalResults
+            | <a class="wordstats-link" href="@routes.NotiLyticsController.wordStats(searchQuery.getSearchTerm)">More stats</a>
+        </h3>
+        <p style="color: #666; font-size: 0.95em;">
+            <b>Flesch-Kincaid Grade Level Avg.=</b> @searchQuery.getAverageFleschKincaidGradeFormatted,
+            <b>Flesch Reading Ease Score Avg.=</b> @searchQuery.getAverageFleschReadingEaseFormatted
+        </p>
+
+        @if(searchQuery.getArticles != null && !searchQuery.getArticles.isEmpty()) {
+        <ol>
+            @for(article <- searchQuery.getArticles) {
+            <li>
+                <p><b>Title:</b> <a href="@article.getUrl" target="_blank">@article.getTitle</a></p>
+                <p><b>Source:</b> 
+                    @if(article.getSourceId != null && !article.getSourceId.isEmpty) {
+                        <a href="@routes.NotiLyticsController.sourceProfile(article.getSourceId)">@article.getSourceName</a>
+                    } else {
+                        <a href="@routes.NotiLyticsController.sourceProfile(article.getSourceName)">@article.getSourceName</a>
+                    }
+                </p>
+                <p><b>Published:</b> @article.getPublishedAtEDT</p>
+                <p style="color: #555; font-size: 0.9em;">
+                    <b>Flesch-Kincaid Grade Level=</b> @article.getFleschKincaidGradeFormatted,
+                    <b>Flesch Reading Ease Score=</b> @article.getFleschReadingEaseFormatted
+                </p>
+            </li>
+            }
+        </ol>
+        }
+    </div>
+    }
+    }
+
+    @*
+    News Sources Filter Section
+    ----------------------------
+    This form lets users view and filter news sources using three criteria:
+    country, category, and language. When "Show Sources" is clicked, it sends
+    a GET request to NotiLyticsController.showSources(), which retrieves and
+    displays the sources from the NewsAPI based on the selected filters.
+    Each dropdown uses readable names while passing API-compatible codes.
+    *@
+    <form method="GET" action="@routes.NotiLyticsController.showSources()" class="nl-filters">
+        <h2>News Sources</h2>
+        <select name="country">
+            <option value="">All Countries</option>
+            @for((code, name) <- Seq(
+                ("ae","United Arab Emirates"), ("ar","Argentina"), ("at","Austria"), ("au","Australia"),
+                ("be","Belgium"), ("bg","Bulgaria"), ("br","Brazil"), ("ca","Canada"), ("ch","Switzerland"),
+                ("cn","China"), ("co","Colombia"), ("cu","Cuba"), ("cz","Czech Republic"), ("de","Germany"),
+                ("eg","Egypt"), ("fr","France"), ("gb","United Kingdom"), ("gr","Greece"), ("hk","Hong Kong"),
+                ("hu","Hungary"), ("id","Indonesia"), ("ie","Ireland"), ("il","Israel"), ("in","India"),
+                ("it","Italy"), ("jp","Japan"), ("kr","South Korea"), ("lt","Lithuania"), ("lv","Latvia"),
+                ("ma","Morocco"), ("mx","Mexico"), ("my","Malaysia"), ("ng","Nigeria"), ("nl","Netherlands"),
+                ("no","Norway"), ("nz","New Zealand"), ("ph","Philippines"), ("pl","Poland"), ("pt","Portugal"),
+                ("ro","Romania"), ("rs","Serbia"), ("ru","Russia"), ("sa","Saudi Arabia"), ("se","Sweden"),
+                ("sg","Singapore"), ("si","Slovenia"), ("sk","Slovakia"), ("th","Thailand"), ("tr","Turkey"),
+                ("tw","Taiwan"), ("ua","Ukraine"), ("us","United States"), ("ve","Venezuela"), ("za","South Africa")
+            )) {
+                <option value="@code">@name</option>
+            }
+        </select>
+        <select name="category">
+            <option value="">All Categories</option>
+            <option value="business">Business</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="general">General</option>
+            <option value="health">Health</option>
+            <option value="science">Science</option>
+            <option value="sports">Sports</option>
+            <option value="technology">Technology</option>
+        </select>
+        <select name="language">
+            <option value="">All Languages</option>
+            @for((code, name) <- Seq(
+                ("ar","Arabic"), ("de","German"), ("en","English"), ("es","Spanish"),
+                ("fr","French"), ("he","Hebrew"), ("it","Italian"), ("nl","Dutch"),
+                ("no","Norwegian"), ("pt","Portuguese"), ("ru","Russian"),
+                ("sv","Swedish"), ("ud","Urdu"), ("zh","Chinese")
+            )) {
+                <option value="@code">@name</option>
+            }
+        </select>
+        <button type="submit" class="nl-btn-sources">Show Sources</button>
+    </form>
+
+</div>
+}
