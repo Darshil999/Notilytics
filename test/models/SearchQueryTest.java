@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Test class for SearchQuery model, focusing on readability average calculation.
  * Tests the Java 8 Streams API usage for calculating average readability scores
- * as required by Individual Task (e).
+ * and verifies the associated aggregate metrics.
  *
  */
 public class SearchQueryTest {

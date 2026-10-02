@@ -183,8 +183,6 @@ public class NotiLyticsController extends Controller {
 
     /**
      * Displays available news sources filtered by country, category, or language.
-     * This is individual task (c): News Sources
-     * 
      * Allows users to view and filter news sources using three criteria:
      * country, category, and language. When filters are applied, it retrieves
      * and displays the sources from the NewsAPI based on the selected filters.

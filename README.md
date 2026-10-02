@@ -65,7 +65,7 @@ This repository represents Darshil Kalyani's personal implementation of NotiLyti
 ## Tech Stack
 
 ### Backend
-- **Play Framework 2.9.x** (Java)
+- **Play Framework 3.0.5** (Java)
 - **Java 17**
 - **Scala 2.13.17** (for Play templates)
 - **Guice** (Dependency Injection)
@@ -145,7 +145,7 @@ NotiLytics/
 Before running this project, ensure you have the following installed:
 
 - **Java Development Kit (JDK) 17** or higher
-- **sbt (Scala Build Tool)** 1.9.x or higher
+- **sbt (Scala Build Tool)** 1.11.7
 - **Git** (for version control)
 - **News API Key** (free tier available at https://newsapi.org/)
 
@@ -156,18 +156,27 @@ Before running this project, ensure you have the following installed:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Darshil999/Notilytics.git
 cd Notilytics
 ```
 
 ### Step 2: Configure API Key
 
-Edit `conf/application.conf` and add your News API key:
+Set the `NEWS_API_KEY` environment variable before starting or testing the application.
 
-```conf
-newsapi.key = "your-api-key-here"
-newsapi.uri = "https://newsapi.org/v2/everything?"
+#### PowerShell
+
+```powershell
+$env:NEWS_API_KEY = "your-news-api-key"
 ```
+
+#### macOS/Linux
+
+```bash
+export NEWS_API_KEY="your-news-api-key"
+```
+
+The application reads this environment variable through `conf/application.conf`.
 
 ### Step 3: Install Dependencies
 
@@ -230,11 +239,9 @@ sbt "testOnly models.*"
 sbt "testOnly utils.*"
 ```
 
-### Expected Test Results
+### Test Results
 
-- **Total Tests**: 184 passing tests
-- **Target Coverage**: 100% for individual components
-- **Overall Coverage**: High coverage across all critical paths
+The test suite covers controllers, models, utilities, API integrations, and view rendering. Run the commands above for the current test and coverage results.
 
 ---
 
@@ -297,9 +304,9 @@ The project maintains high test coverage with comprehensive unit tests:
 
 ### Coverage by Package
 
-- **Controllers**: Full coverage of all HTTP endpoints and request handling
-- **Models**: Complete testing of data models and API services
-- **Utils**: 100% coverage for ReadabilityCalculator
+- **Controllers**: Tests cover HTTP endpoints and request handling
+- **Models**: Tests cover data models and API services
+- **Utils**: Tests cover readability and sentiment analysis utilities
 - **Views**: Template rendering validation
 
 ### Excluded from Coverage
@@ -360,7 +367,7 @@ Edit `conf/application.conf` to customize:
 
 ```conf
 # News API Configuration
-newsapi.key = "your-api-key"
+newsapi.key = ${?NEWS_API_KEY}
 newsapi.uri = "https://newsapi.org/v2/everything?"
 
 # Play Framework Settings

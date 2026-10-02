@@ -34,7 +34,7 @@ public class NewsAPIServiceTest {
         wsClient = mock(WSClient.class);
         wsRequest = mock(WSRequest.class);
         wsResponse = mock(WSResponse.class);
-        service = new NewsAPIService(wsClient);
+        service = new NewsAPIService(wsClient, "test-key");
         mapper = new ObjectMapper();
     }
 
@@ -51,7 +51,7 @@ public class NewsAPIServiceTest {
     public void testGetWordStatsCountsAndSortsWordsCorrectly() throws Exception {
         String query = "java";
         String expectedUrl = "https://newsapi.org/v2/everything?q=" + query +
-                "&apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&pageSize=50&sortBy=publishedAt";
+                "&apiKey=test-key&pageSize=50&sortBy=publishedAt";
         String json = "{ \"status\":\"ok\", \"articles\":[ " +
                 "{ \"description\":\"Java AI rocks! Java news is cool.\" }, " +
                 "{ \"description\":\"AI rocks again with Java updates.\" } ] }";
@@ -71,7 +71,7 @@ public class NewsAPIServiceTest {
     public void testGetWordStatsIgnoresNonAlphabeticCharacters() throws Exception {
         String query = "symbols";
         String expectedUrl = "https://newsapi.org/v2/everything?q=" + query +
-                "&apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&pageSize=50&sortBy=publishedAt";
+                "&apiKey=test-key&pageSize=50&sortBy=publishedAt";
         String json = "{ \"articles\":[ {\"description\":\"C++ & Java! Python-3 rocks?\"} ]}";
         JsonNode body = mapper.readTree(json);
         stubRequest(expectedUrl, 200, body);
@@ -85,7 +85,7 @@ public class NewsAPIServiceTest {
     public void testGetWordStatsHandlesEmptyOrNullDescriptions() throws Exception {
         String query = "empty";
         String expectedUrl = "https://newsapi.org/v2/everything?q=" + query +
-                "&apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&pageSize=50&sortBy=publishedAt";
+                "&apiKey=test-key&pageSize=50&sortBy=publishedAt";
         String json = "{ \"articles\":[ {\"description\":null}, {\"description\":\"   \"} ]}";
         JsonNode body = mapper.readTree(json);
         stubRequest(expectedUrl, 200, body);
@@ -99,7 +99,7 @@ public class NewsAPIServiceTest {
     public void testGetWordStatsLimitsToTop50Words() throws Exception {
         String query = "limit";
         String expectedUrl = "https://newsapi.org/v2/everything?q=" + query +
-                "&apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&pageSize=50&sortBy=publishedAt";
+                "&apiKey=test-key&pageSize=50&sortBy=publishedAt";
         StringBuilder jsonBuilder = new StringBuilder("{\"articles\":[");
         for (int i = 1; i <= 100; i++) {
             jsonBuilder.append("{\"description\":\"word").append(i).append(" example\"}");
@@ -118,7 +118,7 @@ public class NewsAPIServiceTest {
     public void testGetWordStatsReturnsEmptyMapOnNon200Response() throws Exception {
         String query = "fail";
         String expectedUrl = "https://newsapi.org/v2/everything?q=" + query +
-                "&apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&pageSize=50&sortBy=publishedAt";
+                "&apiKey=test-key&pageSize=50&sortBy=publishedAt";
         stubRequest(expectedUrl, 500, null);
 
         Map<String, Long> stats = service.getWordStats(query).toCompletableFuture().join();
@@ -160,7 +160,7 @@ public class NewsAPIServiceTest {
     /** Checks parsing of sources from listSources(). */
     @Test
     public void testListSourcesParsesSourcesCorrectly() throws Exception {
-        String url = "https://newsapi.org/v2/top-headlines/sources?apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&category=tech";
+        String url = "https://newsapi.org/v2/top-headlines/sources?apiKey=test-key&category=tech";
         JsonNode body = mapper.readTree(
                 "{\"sources\":[{\"id\":\"bbc\",\"name\":\"BBC News\",\"description\":\"desc\",\"url\":\"url\",\"category\":\"tech\",\"language\":\"en\",\"country\":\"gb\"}]}");
         stubRequest(url, 200, body);
@@ -173,7 +173,7 @@ public class NewsAPIServiceTest {
     /** Returns empty list for listSources() non-200 response. */
     @Test
     public void testListSourcesHandlesNon200() throws Exception {
-        String url = "https://newsapi.org/v2/top-headlines/sources?apiKey=0eb7128c8d5c41d4a367f4dc22da97bb";
+        String url = "https://newsapi.org/v2/top-headlines/sources?apiKey=test-key";
         stubRequest(url, 404, null);
         List<Source> list = service.listSources(Optional.empty(), Optional.empty(), Optional.empty())
                 .toCompletableFuture().join();
@@ -206,7 +206,7 @@ public class NewsAPIServiceTest {
     public void testGetLatestArticlesForSourceParsesArticles() throws Exception {
         String sourceId = "bbc";
         String url = "https://newsapi.org/v2/top-headlines?sources=" + sourceId +
-                "&apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&pageSize=5";
+                "&apiKey=test-key&pageSize=5";
         String json = "{\"articles\":[{\"title\":\"T1\",\"description\":\"D1\",\"url\":\"https://bbc.com/a1\"," +
                 "\"publishedAt\":\"2025-01-01\",\"source\":{\"id\":\"bbc\",\"name\":\"BBC\"}}]}";
         JsonNode body = mapper.readTree(json);
@@ -219,7 +219,7 @@ public class NewsAPIServiceTest {
     /** Returns empty list when getLatestArticlesForSource() fails. */
     @Test
     public void testGetLatestArticlesForSourceHandlesNon200() throws Exception {
-        String url = "https://newsapi.org/v2/top-headlines?sources=x&apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&pageSize=3";
+        String url = "https://newsapi.org/v2/top-headlines?sources=x&apiKey=test-key&pageSize=3";
         stubRequest(url, 500, null);
         assertTrue(service.getLatestArticlesForSource("x", 3).toCompletableFuture().join().isEmpty());
     }
@@ -240,7 +240,7 @@ public class NewsAPIServiceTest {
         NewsAPIService spy = spy(service);
         doReturn(CompletableFuture.completedFuture(Collections.emptyList()))
                 .when(spy).getLatestArticlesForSource(eq("cnn"), anyInt());
-        String expectedUrl = "https://newsapi.org/v2/everything?q=cnn&apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&pageSize=5&sortBy=publishedAt";
+        String expectedUrl = "https://newsapi.org/v2/everything?q=cnn&apiKey=test-key&pageSize=5&sortBy=publishedAt";
         String json = "{\"articles\":[{\"title\":\"T1\",\"description\":\"D1\",\"url\":\"https://cnn.com/a1\"," +
                 "\"publishedAt\":\"2025-01-01\",\"source\":{\"id\":\"cnn\",\"name\":\"CNN\"}}]}";
         JsonNode body = mapper.readTree(json);
@@ -256,7 +256,7 @@ public class NewsAPIServiceTest {
         NewsAPIService spy = spy(service);
         doReturn(CompletableFuture.completedFuture(Collections.emptyList()))
                 .when(spy).getLatestArticlesForSource(eq("none"), anyInt());
-        String expectedUrl = "https://newsapi.org/v2/everything?q=none&apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&pageSize=2&sortBy=publishedAt";
+        String expectedUrl = "https://newsapi.org/v2/everything?q=none&apiKey=test-key&pageSize=2&sortBy=publishedAt";
         stubRequest(expectedUrl, 404, null);
         assertTrue(spy.getArticlesBySourceNameOrId("none", 2).toCompletableFuture().join().isEmpty());
     }

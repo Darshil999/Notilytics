@@ -7,8 +7,7 @@ import static org.junit.Assert.*;
 /**
  * Unit tests for {code Source}.
  * <p>
- * Ensures constructor and getters return the expected values to help achieve 100% coverage
- * for individual task (a): "Source website profile".
+ * Ensures the constructor and getters return the expected values.
  * </p>
  *
  * @version 1.0

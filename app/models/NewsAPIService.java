@@ -2,6 +2,7 @@ package models;
 
 import play.libs.ws.*;
 import play.libs.Json;
+import com.typesafe.config.Config;
 import com.fasterxml.jackson.databind.JsonNode;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -29,7 +30,7 @@ import java.util.stream.*;
 public class NewsAPIService {
 
     private final WSClient ws;
-    private final String apiKey = "0eb7128c8d5c41d4a367f4dc22da97bb";
+    private final String apiKey;
     private final String baseUrl = "https://newsapi.org/v2/everything";
     private final String sourcesUrl = "https://newsapi.org/v2/top-headlines/sources";
     private final String topHeadlinesUrl = "https://newsapi.org/v2/top-headlines?";
@@ -40,8 +41,16 @@ public class NewsAPIService {
      * @param ws WebService client for making HTTP requests
      */
     @Inject
-    public NewsAPIService(WSClient ws) {
+    public NewsAPIService(WSClient ws, Config configuration) {
         this.ws = ws;
+        this.apiKey = configuration.hasPath("newsapi.key")
+                ? configuration.getString("newsapi.key")
+                : "";
+    }
+
+    public NewsAPIService(WSClient ws, String apiKey) {
+        this.ws = ws;
+        this.apiKey = apiKey;
     }
 
     /**
@@ -348,4 +357,3 @@ public class NewsAPIService {
         return "https://" + cleanName + ".com";
     }
 }
-

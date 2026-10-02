@@ -2,6 +2,7 @@ package models;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import play.libs.ws.*;
+import com.typesafe.config.Config;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.*;
@@ -21,12 +22,20 @@ import java.util.concurrent.CompletionStage;
 public class SourcesAPIService {
 
     private final WSClient ws;
-    private final String apiKey = "0eb7128c8d5c41d4a367f4dc22da97bb";
+    private final String apiKey;
     private final String baseUrl = "https://newsapi.org/v2/top-headlines/sources?";
 
     @Inject
-    public SourcesAPIService(WSClient ws) {
+    public SourcesAPIService(WSClient ws, Config configuration) {
         this.ws = ws;
+        this.apiKey = configuration.hasPath("newsapi.key")
+                ? configuration.getString("newsapi.key")
+                : "";
+    }
+
+    public SourcesAPIService(WSClient ws, String apiKey) {
+        this.ws = ws;
+        this.apiKey = apiKey;
     }
 
     public CompletionStage<List<Source>> getSources(String country, String category, String language) {

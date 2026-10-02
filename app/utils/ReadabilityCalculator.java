@@ -9,8 +9,7 @@ import java.util.regex.Pattern;
  * Flesch-Kincaid formulas. Analyzes text complexity based on
  * word count, sentence count, and syllable count.
  *
- * Part of Individual Task (e) - Description Readability
- * for the NotiLytics project.
+ * Provides description readability metrics for the NotiLytics project.
  *
  */
 public class ReadabilityCalculator {

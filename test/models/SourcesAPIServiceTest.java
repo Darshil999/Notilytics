@@ -36,7 +36,7 @@ public class SourcesAPIServiceTest {
         wsClient = mock(WSClient.class);
         wsRequest = mock(WSRequest.class);
         wsResponse = mock(WSResponse.class);
-        service = new SourcesAPIService(wsClient);
+        service = new SourcesAPIService(wsClient, "test-key");
         mapper = new ObjectMapper();
     }
 
@@ -57,7 +57,7 @@ public class SourcesAPIServiceTest {
     @Test
     public void testGetSourcesParsesSuccessfully() throws Exception {
         String expectedUrl = "https://newsapi.org/v2/top-headlines/sources?"
-                + "apiKey=0eb7128c8d5c41d4a367f4dc22da97bb"
+                + "apiKey=test-key"
                 + "&country=us&category=business&language=en";
 
         String json = "{ \"sources\": [" +
@@ -85,7 +85,7 @@ public class SourcesAPIServiceTest {
     @Test
     public void testGetSourcesDefaultsForMissingFields() throws Exception {
         String expectedUrl = "https://newsapi.org/v2/top-headlines/sources?"
-                + "apiKey=0eb7128c8d5c41d4a367f4dc22da97bb";
+                + "apiKey=test-key";
         String json = "{ \"sources\": [ { } ] }";
 
         JsonNode jsonNode = mapper.readTree(json);
@@ -110,7 +110,7 @@ public class SourcesAPIServiceTest {
     @Test
     public void testGetSourcesReturnsEmptyListOnError() {
         String expectedUrl = "https://newsapi.org/v2/top-headlines/sources?"
-                + "apiKey=0eb7128c8d5c41d4a367f4dc22da97bb&country=ca";
+                + "apiKey=test-key&country=ca";
 
         stubRequest(expectedUrl, 500, null);
 
@@ -124,7 +124,7 @@ public class SourcesAPIServiceTest {
     @Test
     public void testGetSourcesWithNoFiltersBuildsCorrectUrl() throws Exception {
         String expectedUrl = "https://newsapi.org/v2/top-headlines/sources?"
-                + "apiKey=0eb7128c8d5c41d4a367f4dc22da97bb";
+                + "apiKey=test-key";
         String json = "{ \"sources\": [] }";
         JsonNode jsonNode = mapper.readTree(json);
         stubRequest(expectedUrl, 200, jsonNode);

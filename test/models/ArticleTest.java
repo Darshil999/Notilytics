@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 /**
  * Test class for Article model, focusing on readability-related functionality.
- * Tests all readability score methods added as part of Individual Task (e).
+ * Tests all readability score methods.
  *
  */
 public class ArticleTest {
