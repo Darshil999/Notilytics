@@ -156,7 +156,7 @@ Before running this project, ensure you have the following installed:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone "https://github.com/Darshil999/Notilytics/blob/main/README.md"
 cd Notilytics
 ```
 
