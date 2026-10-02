@@ -3,7 +3,6 @@ package utils;
 
 /**
  * Custom Tuple class for returning the number of positive and negative words in an article.
- * @author Finn Kleckner
  */
 public class SentimentTuple {
     private int positives;

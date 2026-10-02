@@ -12,13 +12,11 @@ import java.util.List;
  * Tests the Java 8 Streams API usage for calculating average readability scores
  * as required by Individual Task (e).
  *
- * @author Wei Huang
  */
 public class SearchQueryTest {
 
     /**
      * Test calculateAverageFleschKincaidGrade with multiple articles having valid scores.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverageFleschKincaidGrade_MultipleArticles() {
@@ -41,7 +39,6 @@ public class SearchQueryTest {
 
     /**
      * Test calculateAverageFleschReadingEase with multiple articles having valid scores.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverageFleschReadingEase_MultipleArticles() {
@@ -64,7 +61,6 @@ public class SearchQueryTest {
 
     /**
      * Test with empty article list.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverage_EmptyList() {
@@ -77,7 +73,6 @@ public class SearchQueryTest {
 
     /**
      * Test with null article list.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverage_NullList() {
@@ -90,7 +85,6 @@ public class SearchQueryTest {
     /**
      * Test with articles having zero readability scores (should be filtered out).
      * Tests the filter() method in the Streams API pipeline.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverage_ArticlesWithZeroScores() {
@@ -112,7 +106,6 @@ public class SearchQueryTest {
     /**
      * Test with mix of valid and zero scores.
      * Tests that filter() correctly excludes articles without scores.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverage_MixedScores() {
@@ -136,7 +129,6 @@ public class SearchQueryTest {
 
     /**
      * Test with single article.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverage_SingleArticle() {
@@ -154,7 +146,6 @@ public class SearchQueryTest {
 
     /**
      * Test with negative readability scores (valid case for very simple text).
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverage_NegativeScores() {
@@ -174,8 +165,7 @@ public class SearchQueryTest {
     }
 
     /**
-     * Test with large number of articles (simulating 50 articles from assignment).
-     * @author Wei Huang
+     * Test with large number of articles (simulating a larger result set).
      */
     @Test
     public void testCalculateAverage_LargeNumberOfArticles() {
@@ -198,7 +188,6 @@ public class SearchQueryTest {
 
     /**
      * Test getAverageFleschKincaidGradeFormatted().
-     * @author Wei Huang
      */
     @Test
     public void testGetAverageFleschKincaidGradeFormatted() {
@@ -215,7 +204,6 @@ public class SearchQueryTest {
 
     /**
      * Test getAverageFleschReadingEaseFormatted().
-     * @author Wei Huang
      */
     @Test
     public void testGetAverageFleschReadingEaseFormatted() {
@@ -232,7 +220,6 @@ public class SearchQueryTest {
 
     /**
      * Test formatted output with zero values.
-     * @author Wei Huang
      */
     @Test
     public void testGetFormattedScores_Zero() {
@@ -245,7 +232,6 @@ public class SearchQueryTest {
 
     /**
      * Test formatted output with negative values.
-     * @author Wei Huang
      */
     @Test
     public void testGetFormattedScores_Negative() {
@@ -262,7 +248,6 @@ public class SearchQueryTest {
 
     /**
      * Test basic getter methods.
-     * @author Wei Huang
      */
     @Test
     public void testGetters() {
@@ -282,7 +267,6 @@ public class SearchQueryTest {
 
     /**
      * Test with articles having only non-zero grade (ease is zero).
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverage_OnlyGradeNonZero() {
@@ -300,7 +284,6 @@ public class SearchQueryTest {
 
     /**
      * Test with articles having only non-zero ease (grade is zero).
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverage_OnlyEaseNonZero() {
@@ -318,7 +301,6 @@ public class SearchQueryTest {
 
     /**
      * Test precision with decimal values.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateAverage_DecimalPrecision() {

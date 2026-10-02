@@ -14,7 +14,6 @@ import static org.junit.Assert.*;
  *
  * <p>Tests are self-contained and do not require a running Play server.</p>
  *
- * @author Muhammed Zayed
  * @version 1.0
  */
 public class MainViewTest {

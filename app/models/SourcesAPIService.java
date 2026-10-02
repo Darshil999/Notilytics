@@ -16,7 +16,6 @@ import java.util.concurrent.CompletionStage;
  * Example API endpoint:
  * https://newsapi.org/v2/top-headlines/sources?apiKey=API_KEY&country=us&category=sports&language=en
  *
- * @author Muhammed Zayed
  */
 @Singleton
 public class SourcesAPIService {

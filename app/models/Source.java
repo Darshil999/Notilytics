@@ -4,7 +4,6 @@ package models;
  * Represents a single news source from the NewsAPI,
  * including its name, description, URL, category, language, and country.
  * Used by the SourcesAPIService and controller to display source listings.
- * @author Muhammed Zayed
  */
 public class Source {
     private final String id;

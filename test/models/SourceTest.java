@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
  * for individual task (a): "Source website profile".
  * </p>
  *
- * @author Darshil
  * @version 1.0
  */
 public class SourceTest {
@@ -20,7 +19,6 @@ public class SourceTest {
      * Verifies that the constructor correctly assigns all fields and the getters
      * return those exact values.
      *
-     * @author Darshil
      */
     @Test
     public void testConstructorAndGetters() {
@@ -47,7 +45,7 @@ public class SourceTest {
      * Optional: If {@link Source} overrides {@code toString()}, this test validates that it
      * includes key fields. If not overridden, feel free to remove this test.
      *
-     * Author tag included per assignment guidelines.
+     *
      */
     @Test
     public void testToStringIncludesKeyFieldsIfOverridden() {

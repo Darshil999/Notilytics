@@ -10,9 +10,8 @@ import java.util.regex.Pattern;
  * word count, sentence count, and syllable count.
  *
  * Part of Individual Task (e) - Description Readability
- * for the NotiLytics project (SOEN 6441 - Fall 2025).
+ * for the NotiLytics project.
  *
- * @author Wei Huang
  */
 public class ReadabilityCalculator {
 
@@ -31,7 +30,6 @@ public class ReadabilityCalculator {
      *
      * @param text The text to analyze
      * @return Flesch-Kincaid Grade Level score, or 0.0 if text is empty
-     * @author Wei Huang
      */
     public static double calculateFleschKincaidGrade(String text) {
         if (text == null || text.trim().isEmpty()) {
@@ -68,7 +66,6 @@ public class ReadabilityCalculator {
      *
      * @param text The text to analyze
      * @return Flesch Reading Ease Score, or 0.0 if text is empty
-     * @author Wei Huang
      */
     public static double calculateFleschReadingEase(String text) {
         if (text == null || text.trim().isEmpty()) {
@@ -97,7 +94,6 @@ public class ReadabilityCalculator {
      *
      * @param text The text to analyze (must be non-null and non-empty)
      * @return Number of sentences
-     * @author Wei Huang
      */
     private static int countSentences(String text) {
         String[] sentences = SENTENCE_PATTERN.split(text.trim());
@@ -122,7 +118,6 @@ public class ReadabilityCalculator {
      *
      * @param text The text to analyze (must be non-null and non-empty)
      * @return Number of words
-     * @author Wei Huang
      */
     private static int countWords(String text) {
         java.util.regex.Matcher matcher = WORD_PATTERN.matcher(text);
@@ -147,7 +142,6 @@ public class ReadabilityCalculator {
      *
      * @param text The text to analyze (must be non-null and non-empty)
      * @return Approximate number of syllables
-     * @author Wei Huang
      */
     private static int countSyllables(String text) {
         int totalSyllables = 0;
@@ -190,7 +184,6 @@ public class ReadabilityCalculator {
      *
      * @param score The score to format
      * @return Formatted score string
-     * @author Wei Huang
      */
     public static String formatScore(double score) {
         return String.format("%.2f", score);

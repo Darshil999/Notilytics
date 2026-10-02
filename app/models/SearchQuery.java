@@ -13,7 +13,6 @@ import java.util.List;
  *
  * Used to maintain search history where each search is displayed separately.
  *
- * @author Wei Huang
  */
 public class SearchQuery {
     private String status;
@@ -23,7 +22,6 @@ public class SearchQuery {
     private int totalResults;
     private final String sentiment;
 
-    // Readability metrics - Added by Wei Huang for Individual Part (e)
     private double averageFleschKincaidGrade;
     private double averageFleschReadingEase;
 
@@ -34,7 +32,6 @@ public class SearchQuery {
      * @param sortBy The sorting method (publishedAt, relevancy, popularity)
      * @param articles List of articles (limited to 10)
      * @param totalResults Total number of results available for this search
-     * @author Wei Huang
      */
     public SearchQuery(String status, String searchTerm, String sortBy, List<Article> articles, int totalResults, String sentiment) {
         this.status = status;
@@ -44,7 +41,6 @@ public class SearchQuery {
         this.totalResults = totalResults;
         this.sentiment = sentiment;
 
-        // Calculate average readability scores using Java 8 Streams API - Added by Wei Huang
         this.averageFleschKincaidGrade = calculateAverageFleschKincaidGrade();
         this.averageFleschReadingEase = calculateAverageFleschReadingEase();
     }
@@ -52,7 +48,6 @@ public class SearchQuery {
     /**
      * Constructor for SearchQuery when there is an error, or no search yet.
      * @param status
-     * @author Finn Kleckner
      */
     public SearchQuery(String status) {
         this.status = status;
@@ -62,7 +57,6 @@ public class SearchQuery {
         this.totalResults = 0;
         this.sentiment = "";
 
-        // Calculate average readability scores using Java 8 Streams API - Added by Wei Huang
         this.averageFleschKincaidGrade = 0.0;
         this.averageFleschReadingEase = 0.0;
     }
@@ -89,7 +83,6 @@ public class SearchQuery {
      * Gets the average Flesch-Kincaid Grade Level across all articles.
      *
      * @return Average grade level score
-     * @author Wei Huang
      */
     public double getAverageFleschKincaidGrade() {
         return averageFleschKincaidGrade;
@@ -99,7 +92,6 @@ public class SearchQuery {
      * Gets the formatted average Flesch-Kincaid Grade Level (2 decimal places).
      *
      * @return Formatted average grade level
-     * @author Wei Huang
      */
     public String getAverageFleschKincaidGradeFormatted() {
         return String.format("%.2f", averageFleschKincaidGrade);
@@ -109,7 +101,6 @@ public class SearchQuery {
      * Gets the average Flesch Reading Ease Score across all articles.
      *
      * @return Average reading ease score
-     * @author Wei Huang
      */
     public double getAverageFleschReadingEase() {
         return averageFleschReadingEase;
@@ -119,7 +110,6 @@ public class SearchQuery {
      * Gets the formatted average Flesch Reading Ease Score (2 decimal places).
      *
      * @return Formatted average reading ease score
-     * @author Wei Huang
      */
     public String getAverageFleschReadingEaseFormatted() {
         return String.format("%.2f", averageFleschReadingEase);
@@ -128,18 +118,17 @@ public class SearchQuery {
     /**
      * Calculates the average Flesch-Kincaid Grade Level using Java 8 Streams API.
      *
-     * This method demonstrates the use of Streams API as required by the assignment.
+     * This method demonstrates the use of Streams API.
      * It filters articles with valid scores, maps to their grade values, and calculates average.
      *
      * @return Average grade level, or 0.0 if no valid scores
-     * @author Wei Huang
      */
     private double calculateAverageFleschKincaidGrade() {
         if (articles == null || articles.isEmpty()) {
             return 0.0;
         }
 
-        // Use Java 8 Streams API to calculate average - Required by assignment
+        // Use Java 8 Streams API to calculate average
         return articles.stream()
                 .filter(article -> article.hasReadabilityScores())  // Only articles with scores
                 .mapToDouble(Article::getFleschKincaidGrade)        // Extract grade scores
@@ -150,18 +139,17 @@ public class SearchQuery {
     /**
      * Calculates the average Flesch Reading Ease Score using Java 8 Streams API.
      *
-     * This method demonstrates the use of Streams API as required by the assignment.
+     * This method demonstrates the use of Streams API.
      * It filters articles with valid scores, maps to their ease values, and calculates average.
      *
      * @return Average reading ease score, or 0.0 if no valid scores
-     * @author Wei Huang
      */
     private double calculateAverageFleschReadingEase() {
         if (articles == null || articles.isEmpty()) {
             return 0.0;
         }
 
-        // Use Java 8 Streams API to calculate average - Required by assignment
+        // Use Java 8 Streams API to calculate average
         return articles.stream()
                 .filter(article -> article.hasReadabilityScores())  // Only articles with scores
                 .mapToDouble(Article::getFleschReadingEase)         // Extract ease scores

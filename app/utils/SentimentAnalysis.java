@@ -20,7 +20,6 @@ public class SentimentAnalysis {
     /**
      * Loads the lexicon from a csv file when the application starts.
      * @return lexicon HashMap
-     * @author Finn Kleckner
      */
     private static Map<String, Integer> loadLexicon() {
         Map<String, Integer> lex = new HashMap<>();
@@ -54,7 +53,6 @@ public class SentimentAnalysis {
      * This function takes a list of articles and returns a string representing the sentiment of the articles.
      * @param articles list of articles from api call
      * @return happy, sad, or neutral face
-     * @author Finn Kleckner
      */
     public static String analyzeSentiment(List<Article> articles) {
 
@@ -78,7 +76,6 @@ public class SentimentAnalysis {
      * Extracts a list of lowercase words from a string of text that may contain punctuation.
      * @param text from article description
      * @return list of words
-     * @author Finn Kleckner
      */
     public static List<String> extractWords(String text) {
         if (text == null || text.isEmpty()) {
@@ -96,7 +93,6 @@ public class SentimentAnalysis {
      * Counts the number of positive and negative words in the article and returns them as a tuple.
      * @param article from api call
      * @return Tuple of positive and negative words.
-     * @author Finn Kleckner
      */
     public static SentimentTuple numberOfNegAndPosWords(Article article) {
         //String cleanedContent = HTML_TAG_PATTERN.matchexr(article.getContent()).replaceAll(" ");

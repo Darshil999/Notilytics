@@ -8,8 +8,6 @@ import java.time.ZoneId;
  * Article model
  * Enhanced to include source URL for hyperlinks and EDT time conversion
  *
- * @author Finn Kleckner
- * @author Wei Huang (added sourceId, sourceUrl fields, EDT time conversion, and readability metrics)
  */
 public class Article {
     private String sourceName;
@@ -21,7 +19,6 @@ public class Article {
     private String url;
     private String publishedAt;
 
-    // Readability metrics - Added by Wei Huang for Individual Part (e)
     private double fleschKincaidGrade;    // Complexity score (grade level required to understand)
     private double fleschReadingEase;     // Ease of reading score (0-100, higher = easier)
 
@@ -36,7 +33,6 @@ public class Article {
      * @param description Article description
      * @param url URL to the article
      * @param publishedAt Publication date in ISO format
-     * @author Wei Huang
      */
     public Article(String sourceName, String sourceId, String sourceUrl, String author,
                    String title, String description, String url, String publishedAt) {
@@ -66,7 +62,6 @@ public class Article {
      * @param fleschKincaidGrade Readability grade level score
      * @param fleschReadingEase Readability ease score
      *
-     * @author Wei Huang
      */
     public Article(String sourceName, String sourceId, String sourceUrl, String author,
                    String title, String description, String url, String publishedAt,
@@ -87,8 +82,6 @@ public class Article {
      * Legacy constructor for backward compatibility
      * Constructs sourceUrl from sourceName if not provided
      *
-     * @author Finn Kleckner
-     * @author Wei Huang (added sourceUrl generation)
      */
     public Article(String sourceName, String author, String title, String description, String url, String publishedAt) {
         this.sourceName = sourceName;
@@ -109,7 +102,6 @@ public class Article {
      *
      * @param sourceName Name of the source
      * @return Generated URL or "#" if cannot generate
-     * @author Wei Huang
      */
     private String generateSourceUrl(String sourceName) {
         if (sourceName == null || sourceName.equals("No source")) {
@@ -129,7 +121,6 @@ public class Article {
     /**
      * Gets the source ID
      * @return source ID
-     * @author Wei Huang
      */
     public String getSourceId() {
         return sourceId;
@@ -138,7 +129,6 @@ public class Article {
     /**
      * Gets the source URL for hyperlinking
      * @return source website URL
-     * @author Wei Huang
      */
     public String getSourceUrl() {
         return sourceUrl != null ? sourceUrl : "#";
@@ -163,7 +153,6 @@ public class Article {
     /**
      * Gets the original published date (ISO format from API)
      * @return Published date in ISO format
-     * @author Finn Kleckner
      */
     public String getPublishedAt() {
         return publishedAt;
@@ -178,7 +167,6 @@ public class Article {
      * and converts it to EDT timezone with a readable format.
      *
      * @return Formatted date in EDT timezone, or original string if conversion fails
-     * @author Wei Huang
      */
     public String getPublishedAtEDT() {
         try {
@@ -209,7 +197,6 @@ public class Article {
      * Formula: 0.39 × (words/sentences) + 11.8 × (syllables/words) - 15.59
      *
      * @return Grade level score (typically 0-18+)
-     * @author Wei Huang
      */
     public double getFleschKincaidGrade() {
         return fleschKincaidGrade;
@@ -219,7 +206,6 @@ public class Article {
      * Gets the formatted Flesch-Kincaid Grade Level as a string (2 decimal places).
      *
      * @return Formatted grade level (e.g., "12.34")
-     * @author Wei Huang
      */
     public String getFleschKincaidGradeFormatted() {
         return String.format("%.2f", fleschKincaidGrade);
@@ -240,7 +226,6 @@ public class Article {
      * Formula: 206.835 - 1.015 × (words/sentences) - 84.6 × (syllables/words)
      *
      * @return Reading ease score (typically 0-100)
-     * @author Wei Huang
      */
     public double getFleschReadingEase() {
         return fleschReadingEase;
@@ -250,7 +235,6 @@ public class Article {
      * Gets the formatted Flesch Reading Ease Score as a string (2 decimal places).
      *
      * @return Formatted reading ease score (e.g., "65.78")
-     * @author Wei Huang
      */
     public String getFleschReadingEaseFormatted() {
         return String.format("%.2f", fleschReadingEase);
@@ -260,7 +244,6 @@ public class Article {
      * Gets a human-readable interpretation of the Reading Ease Score.
      *
      * @return Difficulty level description (e.g., "Standard", "Difficult")
-     * @author Wei Huang
      */
     public String getReadabilityLevel() {
         if (fleschReadingEase >= 90) return "Very Easy";
@@ -277,7 +260,6 @@ public class Article {
      * Used when calculating readability after article creation.
      *
      * @param fleschKincaidGrade Grade level score
-     * @author Wei Huang
      */
     public void setFleschKincaidGrade(double fleschKincaidGrade) {
         this.fleschKincaidGrade = fleschKincaidGrade;
@@ -288,7 +270,6 @@ public class Article {
      * Used when calculating readability after article creation.
      *
      * @param fleschReadingEase Reading ease score
-     * @author Wei Huang
      */
     public void setFleschReadingEase(double fleschReadingEase) {
         this.fleschReadingEase = fleschReadingEase;
@@ -298,7 +279,6 @@ public class Article {
      * Checks if the article has valid readability scores.
      *
      * @return true if both scores are non-zero
-     * @author Wei Huang
      */
     public boolean hasReadabilityScores() {
         return fleschKincaidGrade != 0.0 || fleschReadingEase != 0.0;

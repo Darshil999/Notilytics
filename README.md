@@ -1,8 +1,10 @@
 # NotiLytics
 
-**A Reactive News Analytics Web Application**
+NotiLytics is a reactive Java news analytics application built with Play Framework that combines real-time News API search with sentiment analysis, readability metrics, word-frequency statistics, source exploration, and session-based search history.
 
-NotiLytics is a comprehensive news search and analysis platform built with Play Framework that integrates with the News API to provide real-time news retrieval, sentiment analysis, readability metrics, and source profiling capabilities.
+## Project Background
+
+This repository represents Darshil Kalyani's personal implementation of NotiLytics, developed to explore reactive web development, asynchronous API integration, text analytics, testing, and MVC architecture with Java and Play Framework.
 
 ---
 
@@ -18,8 +20,7 @@ NotiLytics is a comprehensive news search and analysis platform built with Play 
 - [API Endpoints](#api-endpoints)
 - [Key Components](#key-components)
 - [Test Coverage](#test-coverage)
-- [Team](#team)
-- [Course Information](#course-information)
+- [Project Background](#project-background)
 
 ---
 
@@ -32,28 +33,28 @@ NotiLytics is a comprehensive news search and analysis platform built with Play 
 
 ### Analytics Features
 
-1. **News Sources Display** (Task A - Muhammed Zayed Abdul Nasser)
+1. **News Sources Display**
    - Comprehensive list of all available news sources
    - Source filtering and categorization
    - Direct links to source profiles
 
-2. **Source Website Profile** (Task B - Darshil Ketankumar Kalyani)
+2. **Source Website Profile**
    - Detailed information about individual news sources
    - List of articles from specific sources
    - Source metadata and description
 
-3. **Word Statistics** (Task C - Priya Dharshini Krishnan)
+3. **Word Statistics**
    - Word frequency analysis across search results
    - Paginated display of top 20 most frequent words
    - Visualization of word distribution
 
-4. **Article Sentiment Analysis** (Task D - Finn Kleckner)
+4. **Article Sentiment Analysis**
    - Positive, negative, and neutral word detection
    - Percentage-based sentiment scoring
    - Visual emoticon representation (happy, sad, neutral)
    - Real-time analysis of article descriptions
 
-5. **Description Readability** (Task E - Wei Huang)
+5. **Description Readability**
    - Flesch-Kincaid Grade Level calculation
    - Flesch Reading Ease score
    - Average Grade Level and Reading Ease across search results
@@ -156,16 +157,10 @@ Before running this project, ensure you have the following installed:
 
 ```bash
 git clone <repository-url>
-cd soen6441-project-fall2025
+cd Notilytics
 ```
 
-### Step 2: Checkout the Final Branch
-
-```bash
-git checkout final-merge
-```
-
-### Step 3: Configure API Key
+### Step 2: Configure API Key
 
 Edit `conf/application.conf` and add your News API key:
 
@@ -174,7 +169,7 @@ newsapi.key = "your-api-key-here"
 newsapi.uri = "https://newsapi.org/v2/everything?"
 ```
 
-### Step 4: Install Dependencies
+### Step 3: Install Dependencies
 
 ```bash
 sbt clean compile
@@ -319,40 +314,6 @@ Per `build.sbt` configuration, the following are excluded from coverage metrics:
 
 ---
 
-## Team
-
-### SOEN 6441 - Advanced Programming Practices
-**Fall 2025 - Concordia University**
-
-| Team Member | Team Responsibilities | Individual Task |
-|-------------|----------------------|-----------------|
-| **Muhammed Zayed Abdul Nasser** | • Team testing coordination<br>• JavaDoc documentation | **Task A: News Sources**<br>List all available news sources with filtering |
-| **Wei Huang** | • UI design and implementation<br>• Timezone conversion to EDT<br>• Added hyperlinks to sources<br>• Search history display<br>• README documentation | **Task E: Description Readability**<br>Flesch-Kincaid metrics calculation and testing |
-| **Darshil Ketankumar Kalyani** | • Team testing coordination | **Task B: Source Website Profile**<br>Detailed source information pages |
-| **Finn Kleckner** | • Added `newsapi.key` and endpoint in `application.conf`<br>• Implemented HTTP requests to fetch ≤10 articles<br>• Parsed JSON response → `Article` objects | **Task D: Article Sentiment**<br>Sentiment analysis implementation and testing |
-| **Priya Dharshini Krishnan** | • Retrieved `searchTerm` and `sortBy` from form data<br>• Called `NewsApiService.search()`<br>• Sent data to `results.scala.html` | **Task C: Word Stats**<br>Word frequency analysis across search results |
-
----
-
-## Course Information
-
-- **Course**: SOEN 6441 - Advanced Programming Practices
-- **Semester**: Fall 2025
-- **Institution**: Concordia University
-- **Project**: NotiLytics - News Analytics Platform
-
-### Learning Objectives Demonstrated
-
-1. **Reactive Programming**: Asynchronous operations using CompletableFuture
-2. **Dependency Injection**: Guice framework integration
-3. **Test-Driven Development**: Comprehensive unit testing with JUnit and Mockito
-4. **MVC Architecture**: Clean separation of concerns using Play Framework
-5. **API Integration**: RESTful API consumption and data transformation
-6. **Session Management**: User-specific data isolation
-7. **Code Quality**: High test coverage and maintainable code structure
-
----
-
 ## Usage Examples
 
 ### Basic Search
@@ -438,7 +399,7 @@ Configure logging in `conf/logback.xml`:
 
 ## License
 
-This project is developed as part of academic coursework at Concordia University. All rights reserved by the team members.
+This project is maintained as a personal software project by Darshil Kalyani.
 
 ---
 
@@ -446,17 +407,16 @@ This project is developed as part of academic coursework at Concordia University
 
 - **Play Framework** - Reactive web framework
 - **News API** - Real-time news data provider
-- **Concordia University** - SOEN 6441 course structure and guidance
-- **Teaching Team** - Project requirements and feedback
+- **MVC architecture** - Separation of concerns for the web application
 
 ---
 
 ## Contact
 
-For questions or issues related to this project, please contact the team members through Concordia University's official channels.
+For questions or issues, please open an issue in this repository.
 
 ---
 
-**Last Updated**: November 8, 2025  
-**Version**: 1.0-SNAPSHOT  
-**Status**: Final Submission
+**Last Updated**: October 2, 2026
+**Version**: 1.0-SNAPSHOT
+**Status**: Active personal project

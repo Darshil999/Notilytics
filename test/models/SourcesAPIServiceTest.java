@@ -21,7 +21,6 @@ import static org.mockito.Mockito.*;
  * return empty lists.
  * </p>
  *
- * @author Muhammed Zayed
  * @version 1.0
  */
 public class SourcesAPIServiceTest {

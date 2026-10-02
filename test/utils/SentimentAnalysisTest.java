@@ -27,7 +27,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing passing articles with positive sentiment.
-     * @author Finn Kleckner
      */
     @Test
     public void testPositiveSentiment() {
@@ -43,7 +42,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing passing articles with negative sentiment.
-     * @author Finn Kleckner
      */
     @Test
     public void testNegativeSentiment() {
@@ -58,7 +56,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing passing articles with neutral sentiment.
-     * @author Finn Kleckner
      */
     @Test
     public void testNeutralSentiment() {
@@ -72,7 +69,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing passing empty article list.
-     * @author Finn Kleckner
      */
     @Test
     public void testEmptyArticleList() {
@@ -83,7 +79,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing passing article with null description.
-     * @author Finn Kleckner
      */
     @Test
     public void testArticlesWithNullFields() {
@@ -95,7 +90,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing articles with no sentiment words (neutral words only).
-     * @author Finn Kleckner
      */
     @Test
     public void testNoSentimentWords() {
@@ -107,7 +101,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing case insensitivity, uppercase words should be processed the same.
-     * @author Finn Kleckner
      */
     @Test
     public void testCaseInsensitivity() {
@@ -123,7 +116,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing word extraction with punctuation.
-     * @author Finn Kleckner
      */
     @Test
     public void testPunctuationHandling() {
@@ -135,7 +127,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing extractWords method directly.
-     * @author Finn Kleckner
      */
     @Test
     public void testExtractWords() {
@@ -148,7 +139,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing extractWords with null input.
-     * @author Finn Kleckner
      */
     @Test
     public void testExtractWordsNull() {
@@ -159,7 +149,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing extractWords with empty string.
-     * @author Finn Kleckner
      */
     @Test
     public void testExtractWordsEmpty() {
@@ -170,7 +159,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing extractWords with apostrophes (contractions).
-     * @author Finn Kleckner
      */
     @Test
     public void testExtractWordsWithApostrophes() {
@@ -182,7 +170,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing boundary condition - exactly 71% positive.
-     * @author Finn Kleckner
      */
     @Test
     public void testBoundaryPositive() {
@@ -203,7 +190,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing boundary condition - exactly 71% negative.
-     * @author Finn Kleckner
      */
     @Test
     public void testBoundaryNegative() {
@@ -222,7 +208,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing exactly 70% positive (should be neutral).
-     * @author Finn Kleckner
      */
     @Test
     public void testExactly70PercentPositive() {
@@ -241,7 +226,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing multiple articles with mixed sentiments.
-     * @author Finn Kleckner
      */
     @Test
     public void testMultipleArticlesMixed() {
@@ -257,7 +241,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing numberOfNegAndPosWords method directly.
-     * @author Finn Kleckner
      */
     @Test
     public void testNumberOfNegAndPosWords() {
@@ -272,7 +255,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing that numbers and special characters are ignored.
-     * @author Finn Kleckner
      */
     @Test
     public void testNumbersAndSpecialChars() {
@@ -285,7 +267,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing article with empty description but valid title/content.
-     * @author Finn Kleckner
      */
     @Test
     public void testEmptyDescription() {
@@ -296,7 +277,6 @@ public class SentimentAnalysisTest {
 
     /**
      * Testing very long article.
-     * @author Finn Kleckner
      */
     @Test
     public void testVeryLongArticle() {
@@ -314,7 +294,6 @@ public class SentimentAnalysisTest {
      * Helper method for creating test articles.
      * @param description
      * @return dummy article with given description
-     * @author Finn Kleckner
      */
     private Article createArticle(String description) {
         return new Article(null,null, null, null, null, description, null, null);

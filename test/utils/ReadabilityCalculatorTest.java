@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 
 /**
  * Comprehensive test for ReadabilityCalculator
- * @author Wei Huang
  */
 public class ReadabilityCalculatorTest {
 
@@ -275,7 +274,6 @@ public class ReadabilityCalculatorTest {
     /**
      * Test to verify that text without sentence delimiters is treated as one sentence.
      * This ensures the branch "count == 0 ? 1 : count" returns 1 correctly.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_NoDelimiters_VerifyValue() {
@@ -294,7 +292,6 @@ public class ReadabilityCalculatorTest {
     /**
      * Test to verify that words with only non-alphabetic characters are handled correctly.
      * This covers the "if (word.isEmpty()) continue;" branch in countSyllables.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_OnlySymbols() {
@@ -310,7 +307,6 @@ public class ReadabilityCalculatorTest {
      * Test to verify silent 'e' handling when syllables > 1.
      * This covers the TRUE branch of "if (word.endsWith("e") && syllables > 1)".
      * Words like "home", "make", "take" should have silent 'e' subtracted.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_SilentE_MultiSyllable() {
@@ -328,7 +324,6 @@ public class ReadabilityCalculatorTest {
      * Test to verify that single-syllable words ending in 'e' keep their syllable.
      * This covers the FALSE branch of "if (word.endsWith("e") && syllables > 1)".
      * A word like "e" or "be" should still count as 1 syllable.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_SingleSyllableWithE() {
@@ -344,7 +339,6 @@ public class ReadabilityCalculatorTest {
     /**
      * Test to verify words with no vowels get at least 1 syllable.
      * This covers the TRUE branch of "if (syllables == 0)".
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_WordsWithNoVowels_VerifyMinimum() {
@@ -360,7 +354,6 @@ public class ReadabilityCalculatorTest {
     /**
      * Test to verify empty sentences after split are filtered correctly.
      * This covers the loop in countSentences that filters empty strings.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_MultiplePunctuationMarks() {
@@ -375,7 +368,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test FleschReadingEase with the same edge cases to ensure both formulas work.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschReadingEase_OnlySymbols() {
@@ -386,7 +378,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test FleschReadingEase with no delimiters to verify value.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschReadingEase_NoDelimiters_VerifyValue() {
@@ -398,7 +389,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test with text that has mixed punctuation to ensure sentence counting works.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_MixedPunctuation() {
@@ -412,7 +402,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test formatScore with edge cases for complete coverage.
-     * @author Wei Huang
      */
     @Test
     public void testFormatScore_VerySmallNegative() {
@@ -421,7 +410,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test formatScore with a value that rounds up.
-     * @author Wei Huang
      */
     @Test
     public void testFormatScore_RoundingUp() {
@@ -430,7 +418,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test with actual news article description format.
-     * @author Wei Huang
      */
     @Test
     public void testRealWorldNewsDescription() {
@@ -447,7 +434,6 @@ public class ReadabilityCalculatorTest {
     /**
      * Test to cover the sentenceCount == 0 branch (when wordCount > 0).
      * This is a special edge case that's hard to trigger.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_OnlyWhitespaceAndPunctuation() {
@@ -461,7 +447,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test to cover empty sentence branch in countSentences.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_EmptySentencesAfterSplit() {
@@ -475,7 +460,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test FleschReadingEase with edge case to cover the sentenceCount == 0 branch.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschReadingEase_OnlyWhitespaceAndPunctuation() {
@@ -487,7 +471,6 @@ public class ReadabilityCalculatorTest {
     /**
      * Test with text that produces an empty sentence after filtering.
      * This covers the branch where sentence.trim().isEmpty() is true.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_SentencesWithOnlySpaces() {
@@ -502,7 +485,6 @@ public class ReadabilityCalculatorTest {
     /**
      * Test to ensure all private method null checks are covered.
      * Testing via public methods that call them with valid data.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_ValidTextCoversPrivateMethods() {
@@ -516,7 +498,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test formatScore with more variations.
-     * @author Wei Huang
      */
     @Test
     public void testFormatScore_ExactlyTwo() {
@@ -525,7 +506,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test formatScore with negative rounding.
-     * @author Wei Huang
      */
     @Test
     public void testFormatScore_NegativeRounding() {
@@ -535,7 +515,6 @@ public class ReadabilityCalculatorTest {
     /**
      * Test with text that has only punctuation marks separated by spaces.
      * This creates a scenario where split produces empty strings.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_PunctuationWithSpaces() {
@@ -546,7 +525,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test FleschReadingEase with only punctuation marks separated by spaces.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschReadingEase_PunctuationWithSpaces() {
@@ -557,7 +535,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test with consecutive delimiters creating truly empty sentences.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_ConsecutiveDelimiters() {
@@ -568,7 +545,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test a combination that might produce wordCount > 0 but empty sentences.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_WordsButEmptySentences() {
@@ -581,7 +557,6 @@ public class ReadabilityCalculatorTest {
     /**
      * Test to ensure the branch where wordCount != 0 AND sentenceCount != 0 is covered.
      * This is the normal case that should trigger the calculation.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschKincaidGrade_NormalTextWithCalculation() {
@@ -597,7 +572,6 @@ public class ReadabilityCalculatorTest {
 
     /**
      * Test FleschReadingEase with normal text to ensure calculation branch is covered.
-     * @author Wei Huang
      */
     @Test
     public void testCalculateFleschReadingEase_NormalTextWithCalculation() {
@@ -613,7 +587,6 @@ public class ReadabilityCalculatorTest {
      * Test to ensure class can be instantiated (covers constructor).
      * Although this is a utility class with only static methods,
      * this test ensures 100% class coverage.
-     * @author Wei Huang
      */
     @Test
     public void testClassInstantiation() {

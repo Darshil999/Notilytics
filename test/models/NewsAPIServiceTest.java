@@ -19,7 +19,6 @@ import static org.mockito.Mockito.*;
  * Covers word statistics, source fetching, URL helpers,
  * and resilience under malformed or null inputs.
  *
- * @author Muhammed Zayed
  * @version 2.1
  */
 public class NewsAPIServiceTest {
@@ -300,7 +299,6 @@ public class NewsAPIServiceTest {
      * Covers early-return branch in extractDomainFromUrl()
      * when URL is "#", empty, or null (line 327).
      *
-     * @author Muhammed Zayed
      */
     @Test
     public void testExtractDomainFromUrlHandlesEmptyAndHash() throws Exception {

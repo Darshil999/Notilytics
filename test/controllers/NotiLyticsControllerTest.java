@@ -83,7 +83,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: search() returns 400 BAD_REQUEST when search term is null. */
     @Test
-    // Author: Finn Kleckner, Priya Dhanvi, Wei Huang
     public void search_shouldReturnBadRequest_whenSearchTermNull() throws Exception {
         when(formFactory.form()).thenReturn(form);
         when(form.bindFromRequest(request)).thenReturn(form);
@@ -96,7 +95,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: search() returns 400 BAD_REQUEST when search term is blank. */
     @Test
-    // Author: Finn Kleckner, Priya Dhanvi, Wei Huang
     public void search_shouldReturnBadRequest_whenSearchTermBlank() throws Exception {
         when(formFactory.form()).thenReturn(form);
         when(form.bindFromRequest(request)).thenReturn(form);
@@ -109,7 +107,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: search() returns 200 OK when NewsAPIService returns status "ok". */
     @Test
-    // Author: Finn Kleckner, Priya Dhanvi, Wei Huang
     public void search_shouldReturnOk_whenServiceReturnsOk() throws Exception {
         when(formFactory.form()).thenReturn(form);
         when(form.bindFromRequest(request)).thenReturn(form);
@@ -128,7 +125,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: search() returns 500 INTERNAL_SERVER_ERROR when API returns "error". */
     @Test
-    // Author: Finn Kleckner, Priya Dhanvi, Wei Huang
     public void search_shouldReturnInternalServerError_whenStatusError() throws Exception {
         when(formFactory.form()).thenReturn(form);
         when(form.bindFromRequest(request)).thenReturn(form);
@@ -147,7 +143,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: search() handles null articles list gracefully. */
     @Test
-    // Author: Wei Huang
     public void search_shouldHandleNullArticlesGracefully() throws Exception {
         when(formFactory.form()).thenReturn(form);
         when(form.bindFromRequest(request)).thenReturn(form);
@@ -169,7 +164,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: wordStats() returns OK when NewsAPIService completes successfully. */
     @Test
-    // Author: Priya Dhanvi
     public void wordStats_shouldReturnOk_whenSuccess() throws Exception {
         Map<String, Long> map = Map.of("AI", 5L);
         when(newsApiService.getWordStats("AI"))
@@ -181,7 +175,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: wordStats() returns INTERNAL_SERVER_ERROR on exception. */
     @Test
-    // Author: Priya Dhanvi
     public void wordStats_shouldReturnError_whenExceptionThrown() throws Exception {
         CompletableFuture<Map<String, Long>> failed =
                 CompletableFuture.failedFuture(new RuntimeException("boom"));
@@ -197,7 +190,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: sourceProfile() renders OK when source is found. */
     @Test
-    // Author: Darshil Ketankumar Kalyani
     public void sourceProfile_shouldRenderProfile_whenSourcePresent() throws Exception {
         Source src = mockSource();
         when(newsApiService.getSourceById("bbc"))
@@ -211,7 +203,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: sourceProfile() renders OK when source missing but articles exist. */
     @Test
-    // Author: Darshil Ketankumar Kalyani
     public void sourceProfile_shouldRenderProfile_whenSourceMissingButArticlesExist() throws Exception {
         when(newsApiService.getSourceById("cnn"))
                 .thenReturn(CompletableFuture.completedFuture(Optional.empty()));
@@ -224,7 +215,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: sourceProfile() returns 404 when both source and articles are missing. */
     @Test
-    // Author: Darshil Ketankumar Kalyani
     public void sourceProfile_shouldReturnNotFound_whenNoSourceNoArticles() throws Exception {
         when(newsApiService.getSourceById("none"))
                 .thenReturn(CompletableFuture.completedFuture(Optional.empty()));
@@ -241,7 +231,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: showSources() returns OK for valid country, category, and language. */
     @Test
-    // Author: Muhammed Zayed Abdul Nasser, Wei Huang
     public void showSources_shouldReturnOk_whenValid() throws Exception {
         when(request.getQueryString("country")).thenReturn("us");
         when(request.getQueryString("category")).thenReturn("tech");
@@ -261,7 +250,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: getOrCreateSessionId() returns existing session ID when available. */
     @Test
-    // Author: Wei Huang
     public void getOrCreateSessionId_shouldReturnExisting() throws Exception {
         when(session.get("sessionId")).thenReturn(Optional.of("xyz"));
         var method = NotiLyticsController.class.getDeclaredMethod("getOrCreateSessionId", Http.Request.class);
@@ -272,7 +260,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: getOrCreateSessionId() generates new ID when missing. */
     @Test
-    // Author: Wei Huang
     public void getOrCreateSessionId_shouldGenerateNewWhenMissing() throws Exception {
         when(session.get("sessionId")).thenReturn(Optional.empty());
         var method = NotiLyticsController.class.getDeclaredMethod("getOrCreateSessionId", Http.Request.class);
@@ -284,7 +271,6 @@ public class NotiLyticsControllerTest {
 
     /** Tests: processArticlesWithStreams() safely handles null and enforces 10-item limit. */
     @Test
-    // Author: Wei Huang
     public void processArticlesWithStreams_shouldHandleNullAndTrim() throws Exception {
         var method = NotiLyticsController.class.getDeclaredMethod("processArticlesWithStreams", List.class);
         method.setAccessible(true);

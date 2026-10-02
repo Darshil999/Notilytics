@@ -3,10 +3,10 @@ GET     /                               controllers.NotiLyticsController.index(r
 GET     /search                         controllers.NotiLyticsController.search(request: play.mvc.Http.Request)
 GET     /wordstats/:query              controllers.NotiLyticsController.wordStats(query: String, request: play.mvc.Http.Request)
 
-# Source profile route - Added by task5
+# Source profile route
 GET     /source/:id                     controllers.NotiLyticsController.sourceProfile(id: String, request: play.mvc.Http.Request)
 
-# Show sources route - Added by task c
+# Show available news sources
 GET     /sources                        controllers.NotiLyticsController.showSources(request: play.mvc.Http.Request)
 
 # Keep static assets

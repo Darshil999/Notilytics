@@ -38,7 +38,6 @@ public class NotiLyticsController extends Controller {
     /**
      * Thread-safe storage for user search histories.
      * Maps session ID to list of SearchQuery objects.
-     * Added by Wei Huang for session-isolated search history management.
      */
     private static final ConcurrentHashMap<String, List<SearchQuery>> sessionHistories =
             new ConcurrentHashMap<>();
@@ -55,9 +54,6 @@ public class NotiLyticsController extends Controller {
      *
      * @param request the HTTP request
      * @return index.scala.html render
-     * @author Priya Dhanvi
-     * @author Wei Huang (added search history display)
-     * @author Finn Kleckner (implemented call to NewsAPIService)
      */
     public Result index(Http.Request request) {
         String sessionId = getOrCreateSessionId(request);
@@ -71,8 +67,6 @@ public class NotiLyticsController extends Controller {
      *
      * @param request the HTTP request containing searchTerm and sortBy parameters
      * @return CompletionStage of Result with asynchronously rendered page
-     * @author Finn Kleckner and Priya Dhanvi
-     * @author Wei Huang (multiple search history with separate display)
      */
     public CompletionStage<Result> search(Http.Request request) {
         DynamicForm form = formFactory.form().bindFromRequest(request);
@@ -137,7 +131,6 @@ public class NotiLyticsController extends Controller {
      * @param query The search query
      * @param request the HTTP request
      * @return CompletionStage of Result with word statistics
-     * @author Priya Dhanvi
      */
     public CompletionStage<Result> wordStats(String query, Http.Request request) {
         return newsApiService.getWordStats(query)
@@ -162,7 +155,6 @@ public class NotiLyticsController extends Controller {
      * @param id The source identifier or name
      * @param request the HTTP request
      * @return CompletionStage of Result with source profile page
-     * @author Darshil Ketankumar Kalyani
      */
     public CompletionStage<Result> sourceProfile(String id, Http.Request request) {
         CompletionStage<Optional<Source>> srcStage = newsApiService.getSourceById(id);
@@ -199,8 +191,6 @@ public class NotiLyticsController extends Controller {
      *
      * @param request the HTTP request
      * @return CompletionStage of Result with sources list
-     * @author Muhammed Zayed Abdul Nasser
-     * @author Wei Huang (integration with final-merge branch)
      */
     public CompletionStage<Result> showSources(Http.Request request) {
         String country = request.getQueryString("country");
@@ -218,7 +208,6 @@ public class NotiLyticsController extends Controller {
     /**
      * Gets the session ID from the request or creates a new one
      *
-     * @author Wei Huang
      */
     private String getOrCreateSessionId(Http.Request request) {
         Optional<String> existingSessionId = request.session().get("sessionId");
@@ -231,7 +220,6 @@ public class NotiLyticsController extends Controller {
     /**
      * Processes articles using Java 8+ Streams API
      *
-     * @author Wei Huang
      */
     private List<Article> processArticlesWithStreams(List<Article> articles) {
         if (articles == null) {

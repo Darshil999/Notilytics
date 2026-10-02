@@ -24,10 +24,6 @@ import java.util.stream.*;
  *  • Compute word-level statistics using Java 8 Streams API
  *  • Handle API errors gracefully
  *
- * @author Finn Kleckner (original implementation)
- * @author Wei Huang (added source URL extraction, readability calculation, and error handling)
- * @author Priya Dhanvi (added word statistics functionality)
- * @author Darshil Ketankumar Kalyani (added source profile functionality)
  */
 @Singleton
 public class NewsAPIService {
@@ -42,7 +38,6 @@ public class NewsAPIService {
      * Constructor with dependency injection for WSClient
      *
      * @param ws WebService client for making HTTP requests
-     * @author Finn Kleckner
      */
     @Inject
     public NewsAPIService(WSClient ws) {
@@ -56,8 +51,6 @@ public class NewsAPIService {
      * @param query Search keywords
      * @param sortBy Sorting method (publishedAt, relevancy, popularity)
      * @return CompletionStage of QueryResult containing articles
-     * @author Finn Kleckner
-     * @author Wei Huang (added source URL extraction and readability calculation)
      */
     public CompletionStage<SearchQuery> search(String query, String sortBy) {
         String url = baseUrl + "?q=" + query + "&sortBy=" + sortBy + "&pageSize=10&apiKey=" + apiKey;
@@ -92,11 +85,9 @@ public class NewsAPIService {
                                 String description = articleNode.get("description").asText("No description");
                                 String publishedAt = articleNode.get("publishedAt").asText("");
 
-                                // Calculate readability scores for the description - Added by Wei Huang
                                 double fleschKincaidGrade = utils.ReadabilityCalculator.calculateFleschKincaidGrade(description);
                                 double fleschReadingEase = utils.ReadabilityCalculator.calculateFleschReadingEase(description);
 
-                                // Create Article with source URL - Modified by Wei Huang
                                 articles.add(new Article(sourceName, sourceId, sourceUrl, author, title, description, articleUrl, publishedAt, fleschKincaidGrade, fleschReadingEase));
                             }
                         }
@@ -117,7 +108,6 @@ public class NewsAPIService {
      *
      * @param query Search keywords
      * @return CompletionStage of Map containing word frequencies (word -> count)
-     * @author Priya Dhanvi
      */
     public CompletionStage<Map<String, Long>> getWordStats(String query) {
         String url = baseUrl + "?q=" + query + "&apiKey=" + apiKey +
@@ -169,7 +159,6 @@ public class NewsAPIService {
     /**
      * List news sources with optional filters
      * 
-     * @author Darshil Ketankumar Kalyani
      */
     public CompletionStage<List<Source>> listSources(Optional<String> category, Optional<String> language, Optional<String> country) {
         StringBuilder urlBuilder = new StringBuilder(sourcesUrl + "?apiKey=" + apiKey);
@@ -199,7 +188,6 @@ public class NewsAPIService {
     /**
      * Get source by ID
      * 
-     * @author Darshil Ketankumar Kalyani
      */
     public CompletionStage<Optional<Source>> getSourceById(String sourceId) {
         return listSources(Optional.empty(), Optional.empty(), Optional.empty())
@@ -209,7 +197,6 @@ public class NewsAPIService {
     /**
      * Fetch latest articles for a source id using Top Headlines endpoint
      * 
-     * @author Darshil Ketankumar Kalyani
      */
     public CompletionStage<List<Article>> getLatestArticlesForSource(String sourceId, int pageSize) {
         String url = topHeadlinesUrl + "sources=" + sourceId + "&apiKey=" + apiKey + "&pageSize=" + pageSize;
@@ -227,7 +214,6 @@ public class NewsAPIService {
                 String author = item.findPath("author").asText("No author");
                 String sid = item.findPath("source").findPath("id").asText((String) null);
                 
-                // Calculate readability scores - Wei Huang
                 double fleschKincaidGrade = utils.ReadabilityCalculator.calculateFleschKincaidGrade(description);
                 double fleschReadingEase = utils.ReadabilityCalculator.calculateFleschReadingEase(description);
                 
@@ -250,7 +236,6 @@ public class NewsAPIService {
      * @param sourceNameOrId Either the source ID or source name
      * @param pageSize Number of articles to fetch
      * @return CompletionStage of List of Articles
-     * @author Darshil Ketankumar Kalyani
      */
     public CompletionStage<List<Article>> getArticlesBySourceNameOrId(String sourceNameOrId, int pageSize) {
         // First try as sourceId with top-headlines
@@ -279,7 +264,6 @@ public class NewsAPIService {
                     String author = item.findPath("author").asText("No author");
                     String sid = item.findPath("source").findPath("id").asText((String) null);
                     
-                    // Calculate readability scores - Wei Huang
                     double fleschKincaidGrade = utils.ReadabilityCalculator.calculateFleschKincaidGrade(description);
                     double fleschReadingEase = utils.ReadabilityCalculator.calculateFleschReadingEase(description);
                     
@@ -303,8 +287,6 @@ public class NewsAPIService {
      * @param sourceName The source display name
      * @param articleUrl The article URL to extract domain from
      * @return Constructed source URL
-     * @author Wei Huang
-     * @author Darshil Ketankumar Kalyani (improved URL extraction)
      */
     private String constructSourceUrlFromArticle(String sourceId, String sourceName, String articleUrl) {
         // Try to extract domain from article URL (most reliable)
@@ -325,7 +307,6 @@ public class NewsAPIService {
      * 
      * @param url Full article URL
      * @return Domain URL or null if invalid
-     * @author Darshil Ketankumar Kalyani
      */
     private String extractDomainFromUrl(String url) {
         try {
@@ -348,7 +329,6 @@ public class NewsAPIService {
      * @param sourceId The source identifier from NewsAPI
      * @param sourceName The source display name
      * @return Constructed source URL or "#" if unavailable
-     * @author Wei Huang
      */
     private String constructSourceUrl(String sourceId, String sourceName) {
         // Prefer sourceId as it's more reliable

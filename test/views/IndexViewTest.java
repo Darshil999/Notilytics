@@ -26,7 +26,6 @@ import static org.junit.Assert.*;
  * {@code index.scala.html(message: String, searchHistory: List[SearchQuery], request: Http.Request)}</p>
  *
  * <p><b>Authors (template & tests):</b>  
- * Wei Huang, Priya Dhanvi, Darshil Ketankumar Kalyani, Muhammed Zayed Abdul Nasser</p>
  *
  * @version 3.1
  * @since 2025-11-08
@@ -44,7 +43,6 @@ public class IndexViewTest {
 
     /** Tests: renders correctly when no search results are available. */
     @Test
-    // Author: Wei Huang & Priya Dhanvi
     public void testIndexViewWithEmptyResults() {
         SearchQuery queryResult = new SearchQuery("ok", "", "", Collections.emptyList(), 0, ":-|");
         Http.Request request = fakeRequest();
@@ -61,7 +59,6 @@ public class IndexViewTest {
 
     /** Tests: renders correctly when multiple articles exist in the list. */
     @Test
-    // Author: Priya Dhanvi & Wei Huang
     public void testIndexViewWithArticles() {
         Article article1 = new Article(
                 "TechCrunch", "John Doe", "AI Revolution",
@@ -87,7 +84,6 @@ public class IndexViewTest {
 
     /** Tests: displays an error message properly when status is "error". */
     @Test
-    // Author: Priya Dhanvi
     public void testIndexViewWithErrorStatus() {
         SearchQuery queryResult = new SearchQuery("error", "", "", Collections.emptyList(), 0, ":-|");
         Http.Request request = fakeRequest();
@@ -105,7 +101,6 @@ public class IndexViewTest {
 
     /** Tests: ensures country, category, and language dropdowns exist. */
     @Test
-    // Author: Muhammed Zayed Abdul Nasser & Wei Huang
     public void testDropdownFiltersExist() {
         SearchQuery query = new SearchQuery("ok", "", "", Collections.emptyList(), 0, ":-|");
         Http.Request request = fakeRequest();
@@ -119,7 +114,6 @@ public class IndexViewTest {
 
     /** Tests: verifies the presence of sort-by radio buttons. */
     @Test
-    // Author: Priya Dhanvi & Wei Huang
     public void testSortByRadioButtonsExist() {
         SearchQuery query = new SearchQuery("ok", "", "", Collections.emptyList(), 0, ":-|");
         Http.Request request = fakeRequest();
@@ -133,7 +127,6 @@ public class IndexViewTest {
 
     /** Tests: validates key country names are in the dropdown. */
     @Test
-    // Author: Muhammed Zayed Abdul Nasser & Wei Huang
     public void testCountryDropdownIncludesExpectedCountries() {
         SearchQuery query = new SearchQuery("ok", "", "", Collections.emptyList(), 0, ":-|");
         Http.Request request = fakeRequest();
@@ -148,7 +141,6 @@ public class IndexViewTest {
 
     /** Tests: validates that all category options are present. */
     @Test
-    // Author: Muhammed Zayed Abdul Nasser
     public void testCategoryDropdownIncludesExpectedOptions() {
         SearchQuery query = new SearchQuery("ok", "", "", Collections.emptyList(), 0, ":-|");
         Http.Request request = fakeRequest();
@@ -163,7 +155,6 @@ public class IndexViewTest {
 
     /** Tests: confirms all language options appear in dropdown. */
     @Test
-    // Author: Muhammed Zayed Abdul Nasser
     public void testLanguageDropdownIncludesExpectedOptions() {
         SearchQuery query = new SearchQuery("ok", "", "", Collections.emptyList(), 0, ":-|");
         Http.Request request = fakeRequest();
@@ -182,7 +173,6 @@ public class IndexViewTest {
 
     /** Tests: ensures sentiment icons (:-| etc.) render safely in HTML. */
     @Test
-    // Author: Priya Dhanvi & Wei Huang
     public void testSentimentIconsRenderSafely() {
         SearchQuery query = new SearchQuery("ok", "", "", Collections.emptyList(), 0, ":-|");
         Http.Request request = fakeRequest();
@@ -195,7 +185,6 @@ public class IndexViewTest {
 
     /** Tests: verifies safe rendering when searchHistory is null. */
     @Test
-    // Author: Wei Huang
     public void testRendersSafelyWithNullSearchHistory() {
         Http.Request request = fakeRequest();
         Content html = views.html.index.render("NotiLytics", null, request);

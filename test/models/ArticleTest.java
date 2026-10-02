@@ -7,13 +7,11 @@ import static org.junit.Assert.*;
  * Test class for Article model, focusing on readability-related functionality.
  * Tests all readability score methods added as part of Individual Task (e).
  *
- * @author Wei Huang
  */
 public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() for "Very Easy" range (90-100).
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_VeryEasy() {
@@ -26,7 +24,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() for "Easy" range (80-89).
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_Easy() {
@@ -39,7 +36,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() for "Fairly Easy" range (70-79).
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_FairlyEasy() {
@@ -52,7 +48,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() for "Standard" range (60-69).
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_Standard() {
@@ -65,7 +60,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() for "Fairly Difficult" range (50-59).
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_FairlyDifficult() {
@@ -78,7 +72,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() for "Difficult" range (30-49).
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_Difficult() {
@@ -91,7 +84,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() for "Very Confusing" range (0-29).
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_VeryConfusing() {
@@ -104,7 +96,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() at boundary: exactly 90.
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_Boundary90() {
@@ -117,7 +108,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() at boundary: exactly 80.
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_Boundary80() {
@@ -130,7 +120,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() at boundary: exactly 70.
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_Boundary70() {
@@ -143,7 +132,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() at boundary: exactly 60.
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_Boundary60() {
@@ -156,7 +144,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() at boundary: exactly 50.
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_Boundary50() {
@@ -169,7 +156,6 @@ public class ArticleTest {
 
     /**
      * Test getReadabilityLevel() at boundary: exactly 30.
-     * @author Wei Huang
      */
     @Test
     public void testGetReadabilityLevel_Boundary30() {
@@ -182,7 +168,6 @@ public class ArticleTest {
 
     /**
      * Test getFleschKincaidGrade() getter.
-     * @author Wei Huang
      */
     @Test
     public void testGetFleschKincaidGrade() {
@@ -195,7 +180,6 @@ public class ArticleTest {
 
     /**
      * Test getFleschReadingEase() getter.
-     * @author Wei Huang
      */
     @Test
     public void testGetFleschReadingEase() {
@@ -208,7 +192,6 @@ public class ArticleTest {
 
     /**
      * Test getFleschKincaidGradeFormatted() with positive value.
-     * @author Wei Huang
      */
     @Test
     public void testGetFleschKincaidGradeFormatted_Positive() {
@@ -221,7 +204,6 @@ public class ArticleTest {
 
     /**
      * Test getFleschKincaidGradeFormatted() with negative value.
-     * @author Wei Huang
      */
     @Test
     public void testGetFleschKincaidGradeFormatted_Negative() {
@@ -234,7 +216,6 @@ public class ArticleTest {
 
     /**
      * Test getFleschKincaidGradeFormatted() with zero.
-     * @author Wei Huang
      */
     @Test
     public void testGetFleschKincaidGradeFormatted_Zero() {
@@ -247,7 +228,6 @@ public class ArticleTest {
 
     /**
      * Test getFleschReadingEaseFormatted() with positive value.
-     * @author Wei Huang
      */
     @Test
     public void testGetFleschReadingEaseFormatted_Positive() {
@@ -260,7 +240,6 @@ public class ArticleTest {
 
     /**
      * Test getFleschReadingEaseFormatted() with zero.
-     * @author Wei Huang
      */
     @Test
     public void testGetFleschReadingEaseFormatted_Zero() {
@@ -273,7 +252,6 @@ public class ArticleTest {
 
     /**
      * Test setFleschKincaidGrade() setter.
-     * @author Wei Huang
      */
     @Test
     public void testSetFleschKincaidGrade() {
@@ -287,7 +265,6 @@ public class ArticleTest {
 
     /**
      * Test setFleschReadingEase() setter.
-     * @author Wei Huang
      */
     @Test
     public void testSetFleschReadingEase() {
@@ -301,7 +278,6 @@ public class ArticleTest {
 
     /**
      * Test hasReadabilityScores() when both scores are zero.
-     * @author Wei Huang
      */
     @Test
     public void testHasReadabilityScores_BothZero() {
@@ -315,7 +291,6 @@ public class ArticleTest {
 
     /**
      * Test hasReadabilityScores() when grade is non-zero.
-     * @author Wei Huang
      */
     @Test
     public void testHasReadabilityScores_GradeNonZero() {
@@ -329,7 +304,6 @@ public class ArticleTest {
 
     /**
      * Test hasReadabilityScores() when ease is non-zero.
-     * @author Wei Huang
      */
     @Test
     public void testHasReadabilityScores_EaseNonZero() {
@@ -343,7 +317,6 @@ public class ArticleTest {
 
     /**
      * Test hasReadabilityScores() when both scores are non-zero.
-     * @author Wei Huang
      */
     @Test
     public void testHasReadabilityScores_BothNonZero() {
@@ -357,7 +330,6 @@ public class ArticleTest {
 
     /**
      * Test constructor without readability scores (default values).
-     * @author Wei Huang
      */
     @Test
     public void testConstructorWithoutReadabilityScores() {
@@ -373,7 +345,6 @@ public class ArticleTest {
 
     /**
      * Test constructor with readability scores.
-     * @author Wei Huang
      */
     @Test
     public void testConstructorWithReadabilityScores() {
